@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="pt-br"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="dark" lang="pt-br">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Smart Stock - Criar Conta</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
                         "primary": "#0065b2",
+                        "accent-green": "#10b981",
                         "background-light": "#f5f7f8",
                         "background-dark": "#0f1a23",
                         "neon-blue": "#00f2ff",
@@ -32,74 +33,90 @@
             },
         }
     </script>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="auth.js" type="module" defer></script>
+    <style>
+        body {
+            min-height: max(900px, 100dvh);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js" type="module" defer></script>
 </head>
-<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col items-center justify-center p-4 flex items-center justify-center min-h-screen">
-<div class="w-full max-w-md bg-background-dark/50 backdrop-blur-xl border border-primary/20 rounded-xl p-8 shadow-2xl mx-auto">
-<!-- Header: Logo Section -->
-<div class="flex flex-col items-center mb-8">
-    <div class="w-full">
-        <form id="signup-form" class="space-y-4">
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="w-full max-w-md bg-background-dark/50 backdrop-blur-xl border border-primary/20 rounded-xl p-8 shadow-2xl mx-auto relative overflow-hidden">
+        <!-- Header: Logo Section -->
+        <div class="flex flex-col items-center mb-8 relative z-10">
+            <img alt="Smart Stock Logo" class="w-64 h-auto mx-auto mb-6 block" src="data:image/png;base64,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"/>
+            <h1 class="text-3xl font-bold tracking-tight text-white mt-4">Criar sua Conta</h1>
+            <p class="text-slate-400 text-sm mt-2">Junte-se ao Smart Stock e otimize seu inventário</p>
+        </div>
+
+        <form id="signup-form" class="space-y-5 relative z-10">
             <!-- Nome Completo -->
             <div>
-                <label class="block text-sm font-medium text-slate-300 mb-1.5 ml-1">Nome Completo</label>
-                <div class="relative">
-                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary text-xl">person</span>
+                <label for="signup-name" class="block text-sm font-medium text-slate-300 mb-2 ml-1">Nome Completo</label>
+                <div class="relative group">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary transition-colors group-focus-within:text-neon-blue">person</span>
                     <input id="signup-name" 
-                        class="w-full pl-11 pr-4 py-3.5 bg-background-dark border border-primary/40 rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-neon-blue focus:border-neon-blue transition-all duration-300" 
-                        placeholder="Seu nome completo" 
+                        class="block w-full pl-11 pr-4 py-4 bg-white/5 dark:bg-slate-800/50 border border-slate-700 rounded-xl focus:ring-2 focus:ring-neon-blue focus:border-transparent transition-all outline-none placeholder:text-slate-500 text-white" 
+                        placeholder="Ex: João Silva" 
                         type="text" required/>
                 </div>
             </div>
 
             <!-- E-mail -->
             <div>
-                <label class="block text-sm font-medium text-slate-300 mb-1.5 ml-1">E-mail Corporativo</label>
-                <div class="relative">
-                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary text-xl">mail</span>
+                <label for="signup-email" class="block text-sm font-medium text-slate-300 mb-2 ml-1">E-mail Corporativo</label>
+                <div class="relative group">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary transition-colors group-focus-within:text-neon-blue">mail</span>
                     <input id="signup-email" 
-                        class="w-full pl-11 pr-4 py-3.5 bg-background-dark border border-primary/40 rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-neon-blue focus:border-neon-blue transition-all duration-300" 
-                        placeholder="seu@email.com" 
+                        class="block w-full pl-11 pr-4 py-4 bg-white/5 dark:bg-slate-800/50 border border-slate-700 rounded-xl focus:ring-2 focus:ring-neon-blue focus:border-transparent transition-all outline-none placeholder:text-slate-500 text-white" 
+                        placeholder="seu@empresa.com" 
                         type="email" required/>
                 </div>
             </div>
 
             <!-- Senha -->
             <div>
-                <label class="block text-sm font-medium text-slate-300 mb-1.5 ml-1">Senha</label>
-                <div class="relative">
-                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary text-xl">lock</span>
+                <label for="signup-password" class="block text-sm font-medium text-slate-300 mb-2 ml-1">Senha</label>
+                <div class="relative group">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary transition-colors group-focus-within:text-neon-blue">lock</span>
                     <input id="signup-password" 
-                        class="w-full pl-11 pr-12 py-3.5 bg-background-dark border border-primary/40 rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-neon-blue focus:border-neon-blue transition-all duration-300" 
+                        class="block w-full pl-11 pr-12 py-4 bg-white/5 dark:bg-slate-800/50 border border-slate-700 rounded-xl focus:ring-2 focus:ring-neon-blue focus:border-transparent transition-all outline-none placeholder:text-slate-500 text-white" 
                         placeholder="Crie uma senha forte" 
                         type="password" required/>
-                    <span id="toggle-signup-password" class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 cursor-pointer hover:text-white">visibility</span>
+                    <div class="absolute inset-y-0 right-0 pr-4 flex items-center">
+                        <span id="toggle-signup-password" class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-white transition-colors">visibility</span>
+                    </div>
                 </div>
             </div>
-<!-- Submit Button -->
-<button id="signup-btn" class="w-full mt-4 py-4 rounded-lg font-bold text-white tracking-wider uppercase bg-gradient-to-r from-primary to-neon-green hover:from-neon-blue hover:to-neon-green shadow-[0_0_15px_rgba(0,242,255,0.3)] hover:shadow-[0_0_25px_rgba(0,242,255,0.5)] transition-all duration-300 transform active:scale-[0.98]" type="submit">
-                Criar Conta
+
+            <!-- Submit Button -->
+            <button id="signup-btn" class="w-full mt-6 py-4 rounded-xl font-bold text-white tracking-wider uppercase bg-gradient-to-r from-primary to-neon-blue hover:from-neon-blue hover:to-neon-green shadow-lg shadow-primary/20 hover:shadow-neon-blue/30 transition-all duration-300 transform active:scale-[0.98]" type="submit">
+                Criar Conta Grátis
             </button>
-</form>
-<!-- Footer -->
-<div class="mt-8 text-center">
-<p class="text-slate-400 text-sm">
+        </form>
+
+        <!-- Footer -->
+        <div class="mt-8 text-center relative z-10">
+            <p class="text-slate-400 text-sm">
                 Já possui acesso? 
                 <a class="text-neon-blue font-semibold hover:text-neon-green transition-colors underline-offset-4 hover:underline" href="login.html">
                     Faça Login
                 </a>
-</p>
-</div>
-</div>
-<!-- Background Decoration Elements -->
-<div class="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 opacity-20">
-<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary blur-[120px] rounded-full"></div>
-<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-neon-green blur-[120px] rounded-full"></div>
-</div>
-</body></html>
+            </p>
+        </div>
+
+        <!-- Background Decoration Elements -->
+        <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
+            <div class="absolute -top-24 -left-24 w-48 h-48 bg-primary/20 blur-[80px] rounded-full"></div>
+            <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-neon-green/20 blur-[80px] rounded-full"></div>
+        </div>
+    </div>
+
+    <!-- External Decorative Lights -->
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 opacity-30">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-neon-green blur-[120px] rounded-full"></div>
+    </div>
+</body>
+</html>
