@@ -92,8 +92,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Signup logic
     const signupBtn = document.getElementById("signup-btn");
+    const signupForm = document.getElementById("signup-form");
+    
     if (signupBtn) {
         signupBtn.addEventListener("click", async (e) => {
+            if (signupForm && !signupForm.checkValidity()) return;
+            
             e.preventDefault();
             const name = document.getElementById("signup-name").value;
             const email = document.getElementById("signup-email").value;
@@ -118,6 +122,23 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    // Password Visibility Toggle Logic
+    const setupPasswordToggle = (toggleId, inputId) => {
+        const toggleEl = document.getElementById(toggleId);
+        const inputEl = document.getElementById(inputId);
+        
+        if (toggleEl && inputEl) {
+            toggleEl.addEventListener("click", () => {
+                const isPassword = inputEl.type === "password";
+                inputEl.type = isPassword ? "text" : "password";
+                toggleEl.innerText = isPassword ? "visibility_off" : "visibility";
+            });
+        }
+    };
+
+    setupPasswordToggle("toggle-password", "password");
+    setupPasswordToggle("toggle-signup-password", "signup-password");
 
     // Logout logic
     const logoutBtn = document.getElementById("logout-btn");

@@ -44,18 +44,44 @@
 <div class="w-full max-w-md bg-background-dark/50 backdrop-blur-xl border border-primary/20 rounded-xl p-8 shadow-2xl mx-auto">
 <!-- Header: Logo Section -->
 <div class="flex flex-col items-center mb-8">
-</select>
-</div>
-</div>
-<!-- Senha -->
-<div>
-<label class="block text-sm font-medium text-slate-300 mb-1.5 ml-1">Senha</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary text-xl">lock</span>
-<input id="signup-password" class="w-full pl-11 pr-12 py-3.5 bg-background-dark border border-primary/40 rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-neon-blue focus:border-neon-blue transition-all duration-300" placeholder="Crie uma senha forte" type="password"/>
-<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 cursor-pointer hover:text-white">visibility</span>
-</div>
-</div>
+    <div class="w-full">
+        <form id="signup-form" class="space-y-4">
+            <!-- Nome Completo -->
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-1.5 ml-1">Nome Completo</label>
+                <div class="relative">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary text-xl">person</span>
+                    <input id="signup-name" 
+                        class="w-full pl-11 pr-4 py-3.5 bg-background-dark border border-primary/40 rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-neon-blue focus:border-neon-blue transition-all duration-300" 
+                        placeholder="Seu nome completo" 
+                        type="text" required/>
+                </div>
+            </div>
+
+            <!-- E-mail -->
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-1.5 ml-1">E-mail Corporativo</label>
+                <div class="relative">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary text-xl">mail</span>
+                    <input id="signup-email" 
+                        class="w-full pl-11 pr-4 py-3.5 bg-background-dark border border-primary/40 rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-neon-blue focus:border-neon-blue transition-all duration-300" 
+                        placeholder="seu@email.com" 
+                        type="email" required/>
+                </div>
+            </div>
+
+            <!-- Senha -->
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-1.5 ml-1">Senha</label>
+                <div class="relative">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary text-xl">lock</span>
+                    <input id="signup-password" 
+                        class="w-full pl-11 pr-12 py-3.5 bg-background-dark border border-primary/40 rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-neon-blue focus:border-neon-blue transition-all duration-300" 
+                        placeholder="Crie uma senha forte" 
+                        type="password" required/>
+                    <span id="toggle-signup-password" class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 cursor-pointer hover:text-white">visibility</span>
+                </div>
+            </div>
 <!-- Submit Button -->
 <button id="signup-btn" class="w-full mt-4 py-4 rounded-lg font-bold text-white tracking-wider uppercase bg-gradient-to-r from-primary to-neon-green hover:from-neon-blue hover:to-neon-green shadow-[0_0_15px_rgba(0,242,255,0.3)] hover:shadow-[0_0_25px_rgba(0,242,255,0.5)] transition-all duration-300 transform active:scale-[0.98]" type="submit">
                 Criar Conta
