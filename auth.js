@@ -1,6 +1,7 @@
 // Supabase configuration
-const SUPABASE_URL = "https://inbidonghnbvcuozpjvo.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_mmKYgdhPQno1Zh1YQH-yRQ_9RNgiU_n";
+// Get environment variables or fallback to hardcoded strings (backward compatibility)
+const SUPABASE_URL = import.meta.env?.VITE_SUPABASE_URL || "https://inbidonghnbvcuozpjvo.supabase.co";
+const SUPABASE_ANON_KEY = import.meta.env?.VITE_SUPABASE_ANON_KEY || "sb_publishable_mmKYgdhPQno1Zh1YQH-yRQ_9RNgiU_n";
 
 // Initialize Supabase client
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
